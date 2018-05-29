@@ -4,10 +4,10 @@
 var dc = document.createElement;
 document.createElement = function (tag, options) {
   r = dc.call(document, tag, options);
-  if(tag=="img") {
+  if(tag=="img"||tag=='a') {
       var x=r.setAttribute;
       r.setAttribute=function(a,b){
-          if(a=="src"){
+          if(a=="src"||a=="href"){
               b = b.replace("http://cdn.cc98file0.inzju.com","https://ccc98.b0.upaiyun.com");
               b = b.replace("https://cdn.cc98file0.inzju.com","https://ccc98.b0.upaiyun.com");
           }
