@@ -1,5 +1,22 @@
 
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="renderer" content="webkit"><title>CC98论坛</title><link type="image/x-icon" rel="icon" href="/static/98icon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256"><link type="text/css" rel="stylesheet" href="/static/content/font-awesome/css/font-awesome.min.css"><link type="text/css" rel="stylesheet" href="/static/content/DPlayer.min.css"><link type="text/css" rel="stylesheet" href="/static/content/APlayer.min.css"><link type="text/css" rel="stylesheet" href="/static/scripts/lib/editor.md/css/editormd.css"><script>// 控制用户缓存
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="renderer" content="webkit"><title>CC98论坛</title><link type="image/x-icon" rel="icon" href="/static/98icon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256"><link type="text/css" rel="stylesheet" href="/static/content/font-awesome/css/font-awesome.min.css"><link type="text/css" rel="stylesheet" href="/static/content/DPlayer.min.css"><link type="text/css" rel="stylesheet" href="/static/content/APlayer.min.css"><link type="text/css" rel="stylesheet" href="/static/scripts/lib/editor.md/css/editormd.css"><script>
+//hook picture load
+var dc = document.createElement;
+document.createElement = function (tag, options) {
+  r = dc.call(document, tag, options);
+  if(tag=="img") {
+      var x=r.setAttribute;
+      r.setAttribute=function(a,b){
+          if(a=="src"){
+              b = b.replace("cdn.","");
+          }
+          x.call(r,a,b);
+      }
+  }
+  return r;
+}
+
+// 控制用户缓存
         // 需要清理缓存时更新 version
         var version = '3.2.2';
         if(localStorage.getItem('version') !== version) {
