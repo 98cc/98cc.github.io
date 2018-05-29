@@ -4,7 +4,7 @@
 //hook picture load
 var dc = document.createElement;
 document.createElement = function (tag, options) {
-  r = dc.call(document, tag, options);
+  var r = dc.call(document, tag, options);
   if(tag=="img"||tag=='a') {
       var x=r.setAttribute;
       r.setAttribute=function(a,b){
