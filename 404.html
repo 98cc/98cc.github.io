@@ -8,7 +8,8 @@ document.createElement = function (tag, options) {
       var x=r.setAttribute;
       r.setAttribute=function(a,b){
           if(a=="src"){
-              b = b.replace("cdn.","");
+              b = b.replace("http://cdn.cc98file0.inzju.com","https://ccc98.b0.upaiyun.com");
+              b = b.replace("https://cdn.cc98file0.inzju.com","https://ccc98.b0.upaiyun.com");
           }
           return x.call(r,a,b);
       }
