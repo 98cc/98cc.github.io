@@ -10,7 +10,7 @@ document.createElement = function (tag, options) {
           if(a=="src"){
               b = b.replace("cdn.","");
           }
-          x.call(r,a,b);
+          return x.call(r,a,b);
       }
   }
   return r;
