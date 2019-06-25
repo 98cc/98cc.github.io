@@ -9,8 +9,8 @@ document.createElement = function (tag, options) {
       var x=r.setAttribute;
       r.setAttribute=function(a,b){
           if(a=="src"||a=="href"){
-              b = b.replace("http://cdn.cc98file0.inzju.com","https://ccc98.b0.upaiyun.com");
-              b = b.replace("https://cdn.cc98file0.inzju.com","https://ccc98.b0.upaiyun.com");
+              b = b.replace("http://cdn.cc98file0.inzju.com","http://cc98img0.inzju.com");
+              b = b.replace("https://cdn.cc98file0.inzju.com","http://cc98img0.inzju.com");
           }
           return x.call(r,a,b);
       }
