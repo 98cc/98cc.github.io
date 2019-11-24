@@ -1,0 +1,19 @@
+<meta name="referrer" content="no-referrer">
+<script src="./fetch.min.js"></script>
+<script src="./fetch-robot.min.js"></script>
+
+<script>
+    // Enable requests to be passed through the current frame using fetchRobot
+    fetchRobot.serve({
+
+        allow: [
+            {
+                path: '*',
+                domain: '*',
+                headers: '*',
+                credentials: '*',
+                responseHeaders: '*'
+            }
+        ]
+    });
+</script>
