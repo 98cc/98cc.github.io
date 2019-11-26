@@ -1,3 +1,4 @@
+<script src="https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la/jquery.min.js"></script>
 <script src="https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la/fetch-robot.min.js"></script>
 <h3><a href="#" onclick="setproxy()">Set Proxy</a></h3>
 <p>Current: <span id="current"></span> <span id="status"></span></p>
@@ -7,8 +8,10 @@
 
 <b>Examples:</b>
 <ul>
-<li><a href="https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la/proxy.html">7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la</li>
-<li><a href="https://98cc.github.io/proxy.html">98cc.github.io</a></li>
+<li>7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la</li>
+<li>98cc.github.io</li>
+<li>https://ipfs.greyh.at/ipfs/QmUY3qMC9NTCaZs3nXS3JhnpxWVNPLVcaDGxrqUxBKQa8P/</li>
+<li>https://ipfs.jes.xxx/ipfs/QmUY3qMC9NTCaZs3nXS3JhnpxWVNPLVcaDGxrqUxBKQa8P/</li>
 </ul>
 <script>
 function enterdomain(){
@@ -24,23 +27,33 @@ function checkstatus(url, success_callback, failed_callback){
     if(!url||url=="none"){
         proxy={fetch: window.fetch.bind(window)}; 
     }else{
+        if(! /https:\/\//.test(url)){url = "https://"+url+"/proxy.html"}
         proxy = fetchRobot.connect({ url: url});
     }
     document.getElementById("status").innerHTML='';
     proxy.fetch("https://api1.cc98.vaynetian.com/config/global")
-        .then(()=>(document.getElementById("status").innerHTML="<span style='color:green'>ok</span>", setTimeout(function(){success_callback&&success_callback()}, 0)))
-        .catch(()=>(document.getElementById("status").innerHTML="<span style='color:red'>failed</span>", setTimeout(function(){failed_callback&&failed_callback()},0)))
+        .then(()=>(document.getElementById("status").innerHTML="<span style='color:green'>ok</span> <a href='/'>Return</a>", setTimeout(function(){success_callback&&success_callback(url)}, 0)))
+        .catch(()=>(document.getElementById("status").innerHTML="<span style='color:red'>failed</span>", setTimeout(function(){failed_callback&&failed_callback(url)},0)))
 }
 function autoload(){
     var configurl=localStorage.getItem("configurl");
     checkstatus(configurl, null, setproxy);
 }
+function success_and_return(url){
+    localStorage.setItem("configurl", url);
+    location.href="/";
+}
+function failed_but_record(url){
+    localStorage.setItem("configurl", url);
+}
 function setproxy(){
     var url = enterdomain();
-    checkstatus(url, function(){
-        localStorage.setItem("configurl", url);
-        location.href="/";
-    })
+    checkstatus(url, success_and_return, failed_but_record)
 }
-window.onload=autoload;
+$(function(){
+    autoload();
+    $("ul li").on("click", function(){
+        checkstatus($(this)[0].innerHTML, success_and_return, failed_but_record);
+    });
+});
 </script>

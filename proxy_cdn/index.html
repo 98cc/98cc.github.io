@@ -1,0 +1,18 @@
+<meta name="referrer" content="no-referrer">
+<script src="https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la//fetch.min.js"></script>
+<script src="https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la//fetch-robot.min.js"></script>
+
+<script>
+    // Enable requests to be passed through the current frame using fetchRobot
+    fetchRobot.serve({
+        allow: [
+            {
+                path: '*',
+                domain: '*',
+                headers: '*',
+                credentials: '*',
+                responseHeaders: '*'
+            }
+        ]
+    });
+</script>
