@@ -1,0 +1,46 @@
+<script src="https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la/fetch-robot.min.js"></script>
+<h3><a href="#" onclick="setproxy()">Set Proxy</a></h3>
+<p>Current: <span id="current"></span> <span id="status"></span></p>
+
+<h3>Guidance</h3>
+<p>Add <a href="https://raw.githubusercontent.com/98cc/98cc.github.io/master/proxy.html" download="proxy.html">this file</a> to your domain, which should support https.</p>
+
+<b>Examples:</b>
+<ul>
+<li><a href="https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la/proxy.html">7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la</li>
+<li><a href="https://98cc.github.io/proxy.html">98cc.github.io</a></li>
+</ul>
+<script>
+function enterdomain(){
+    var ans=prompt("please set a proxy domain:", "none");
+    if(!ans || ans=="none") return "none";
+    if(! /https:\/\//.test(ans)){ans = "https://"+ans+"/proxy.html"}
+    return ans;
+}
+function checkstatus(url, success_callback, failed_callback){
+    var proxy;
+    if(!url) url = "none";
+    document.getElementById("current").innerHTML = url;
+    if(!url||url=="none"){
+        proxy={fetch: window.fetch.bind(window)}; 
+    }else{
+        proxy = fetchRobot.connect({ url: url});
+    }
+    document.getElementById("status").innerHTML='';
+    proxy.fetch("https://api1.cc98.vaynetian.com/config/global")
+        .then(()=>(document.getElementById("status").innerHTML="<span style='color:green'>ok</span>", setTimeout(function(){success_callback&&success_callback()}, 0)))
+        .catch(()=>(document.getElementById("status").innerHTML="<span style='color:red'>failed</span>", setTimeout(function(){failed_callback&&failed_callback()},0)))
+}
+function autoload(){
+    var configurl=localStorage.getItem("configurl");
+    checkstatus(configurl, null, setproxy);
+}
+function setproxy(){
+    var url = enterdomain();
+    checkstatus(url, function(){
+        localStorage.setItem("configurl", url);
+        location.href="/";
+    })
+}
+window.onload=autoload;
+</script>
