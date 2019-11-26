@@ -18,7 +18,8 @@
 
 <script>
 // add proxy
-var proxy = fetchRobot.connect({ url: 'https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la/proxy.html'});
+//var proxy = fetchRobot.connect({ url: 'https://7971-yqa4xd4ffxjbkn4i-1300356003.tcb.qcloud.la/proxy.html'});
+var proxy={fetch: window.fetch.bind(window)}; 
 document.write('<body style="display:flex;justify-content:center;"><div id="root"></div></body>');
 //hook picture load
 var dc = document.createElement;
