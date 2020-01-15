@@ -18,7 +18,7 @@
 
 <script>
 // add proxy, load configurl
-var configurl=localStorage.getItem("configurl");
+var configurl=localStorage.getItem("configurl")?localStorage.getItem("configurl"):"https://ipfs.globalupload.io/QmUY3qMC9NTCaZs3nXS3JhnpxWVNPLVcaDGxrqUxBKQa8P/";
 var proxy;
 if(configurl&&configurl!="none"){
     proxy = fetchRobot.connect({ url: configurl});
